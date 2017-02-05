@@ -3,8 +3,11 @@ package com.bolyartech.forge.server.module.user_google;
 import com.bolyartech.forge.server.db.DbPool;
 import com.bolyartech.forge.server.module.HttpModule;
 import com.bolyartech.forge.server.module.user.data.screen_name.ScreenNameDbh;
+import com.bolyartech.forge.server.module.user.data.screen_name.ScreenNameDbhImpl;
 import com.bolyartech.forge.server.module.user.data.user.UserDbh;
+import com.bolyartech.forge.server.module.user.data.user.UserDbhImpl;
 import com.bolyartech.forge.server.module.user.data.user_ext_id.UserExtIdDbh;
+import com.bolyartech.forge.server.module.user.data.user_ext_id.UserExtIdDbhImpl;
 import com.bolyartech.forge.server.route.PostRoute;
 import com.bolyartech.forge.server.route.Route;
 
@@ -25,6 +28,15 @@ public class GoogleUserModule implements HttpModule {
     private final ScreenNameDbh mScreenNameDbh;
     private final UserExtIdDbh mUserExtIdDbh;
     private final GoogleSignInWrapper mGoogleSignInWrapper;
+
+
+    public static GoogleUserModule createDefault(DbPool dbPool) {
+        return new GoogleUserModule(dbPool,
+                new UserDbhImpl(),
+                new ScreenNameDbhImpl(),
+                new UserExtIdDbhImpl(),
+                new GoogleSignInWrapperImpl());
+    }
 
 
     public GoogleUserModule(String pathPrefix, DbPool dbPool, UserDbh userDbh,
