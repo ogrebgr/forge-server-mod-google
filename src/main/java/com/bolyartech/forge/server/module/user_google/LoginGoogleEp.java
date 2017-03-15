@@ -64,10 +64,10 @@ public class LoginGoogleEp extends ForgeDbSecureEndpoint {
                 if (user != null) {
                     UserExtId userExtId = mUserExtIdDbh.loadByUser(dbc, user.getId(), UserExtId.Type.GOOGLE);
                     if (userExtId == null) {
-                        // first login using fb
+                        // first login using google
                         return processLoggedFirstGoogleLogin(ctx, dbc, user, googleUser);
                     } else {
-                        // returning fb user
+                        // returning google user
                         return processLoggedReturningGoogleUser(ctx, userExtId, dbc, user, googleUser);
                     }
                 } else {
